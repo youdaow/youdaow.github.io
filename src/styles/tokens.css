@@ -1,0 +1,90 @@
+:root {
+  color-scheme: dark;
+
+  /* 底色：接近纯黑的冷灰，不用渐变光晕 */
+  --bg: #08090c;
+  --bg-elev: #0c0e13;
+  --bg-sunk: rgba(255, 255, 255, 0.012);
+  --bg-hover: rgba(255, 255, 255, 0.028);
+  --nav-bg: rgba(8, 9, 12, 0.82);
+  --field-bg: rgba(255, 255, 255, 0.02);
+
+  /* 发丝分隔线是这个站主要的结构手段 */
+  --rule: rgba(255, 255, 255, 0.075);
+  --rule-strong: rgba(255, 255, 255, 0.14);
+  --rule-hover: rgba(255, 255, 255, 0.22);
+  --track: rgba(255, 255, 255, 0.07);
+
+  --text: #eef0f4;
+  --text-dim: #9aa1ae;
+  --muted: #676e7d;
+  --placeholder: #4d5462;
+
+  /*
+   * 全站唯一一个强调色。
+   * --accent    填充用（按钮、进度条、当前项下划线）
+   * --accent-hi 文字与描边用：深色主题下更亮，浅色主题下更暗，保证对比度
+   */
+  --accent: #5e6ad2;
+  --accent-hi: #8a93e6;
+  --accent-rgb: 94, 106, 210;
+  --on-accent: #ffffff;
+
+  --ok: #5ec98f;
+  --ok-rgb: 94, 201, 143;
+  --danger: #e5735f;
+  --scrollbar-thumb: #1b1e26;
+
+  --font-sans: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei',
+    system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, 'PingFang SC', monospace;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --maxw: 1080px;
+  --nav-h: 60px;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.25, 1);
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --bg-elev: #fbfbfc;
+  --bg-sunk: #f5f6f8;
+  --bg-hover: rgba(17, 23, 41, 0.032);
+  --nav-bg: rgba(255, 255, 255, 0.86);
+  --field-bg: #ffffff;
+
+  --rule: rgba(17, 23, 41, 0.09);
+  --rule-strong: rgba(17, 23, 41, 0.16);
+  --rule-hover: rgba(17, 23, 41, 0.28);
+  --track: rgba(17, 23, 41, 0.1);
+
+  --text: #14161b;
+  --text-dim: #4b5261;
+  --muted: #79808f;
+  --placeholder: #a3a9b5;
+
+  --accent: #4f5ac8;
+  --accent-hi: #3d47ab;
+  --accent-rgb: 79, 90, 200;
+  --on-accent: #ffffff;
+
+  --ok: #17845a;
+  --ok-rgb: 23, 132, 90;
+  --danger: #c04a33;
+  --scrollbar-thumb: #d7dae1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

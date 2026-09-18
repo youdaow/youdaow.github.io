@@ -1,0 +1,210 @@
+.contact__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  gap: clamp(28px, 4vw, 60px);
+  align-items: start;
+}
+
+/* ---------- 渠道：发丝分隔的行，不是五张浮卡 ---------- */
+
+.channels {
+  border-top: 1px solid var(--rule);
+}
+
+.channels__row {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) 28px;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  text-align: left;
+  padding: 16px 8px;
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.2s;
+}
+
+.channels__row:hover {
+  background: var(--bg-hover);
+}
+
+.channels__label {
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.channels__value {
+  font-size: 15px;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.channels__act {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  color: var(--muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.channels__row:hover .channels__act {
+  color: var(--accent-hi);
+  border-color: rgba(var(--accent-rgb), 0.55);
+}
+
+.channels__act.is-done {
+  color: var(--ok);
+  border-color: rgba(var(--ok-rgb), 0.5);
+}
+
+.channels__act svg {
+  width: 14px;
+  height: 14px;
+}
+
+.channels__diag {
+  transform: rotate(45deg);
+}
+
+/* ---------- 表单 ---------- */
+
+.form {
+  padding: 20px clamp(18px, 2.4vw, 24px) clamp(20px, 2.4vw, 24px);
+}
+
+.form__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.form__head .label::before {
+  display: none;
+}
+
+.form__note {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+  padding-top: 18px;
+}
+
+.field__k {
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--field-bg);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  resize: vertical;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--placeholder);
+}
+
+.field input:hover,
+.field textarea:hover {
+  border-color: var(--rule-hover);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  background: rgba(var(--accent-rgb), 0.05);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.16);
+}
+
+.field em {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-style: normal;
+  color: var(--danger);
+  opacity: 0;
+  transform: translateY(-3px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.field.has-err input,
+.field.has-err textarea {
+  border-color: rgba(229, 115, 95, 0.7);
+}
+
+.field.has-err em {
+  opacity: 1;
+  transform: none;
+}
+
+.form__submit {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* ---------- 提示 ---------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 80;
+  max-width: min(88vw, 420px);
+  padding: 11px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  color: var(--text);
+  background: var(--bg-elev);
+  border: 1px solid var(--rule-strong);
+  opacity: 0;
+  transform: translate(-50%, 14px);
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.toast.is-on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 860px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .channels__row {
+    grid-template-columns: 74px minmax(0, 1fr) 26px;
+    gap: 12px;
+    padding-inline: 2px;
+  }
+
+  .channels__value {
+    font-size: 14px;
+  }
+}

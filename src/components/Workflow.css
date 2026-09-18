@@ -1,0 +1,111 @@
+/* 四步流程：一个带内分隔线的表，而不是四张浮起的小卡 */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.step {
+  padding: 22px 22px 26px;
+  border-left: 1px solid var(--rule);
+  transition: background 0.2s;
+}
+
+.step:first-child {
+  border-left: 0;
+}
+
+.step:hover {
+  background: var(--bg-hover);
+}
+
+.step__num {
+  display: block;
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.step__title {
+  margin-top: 14px;
+  font-size: 16.5px;
+  letter-spacing: -0.022em;
+}
+
+.step__text {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.78;
+  color: var(--text-dim);
+}
+
+/* 常用 agent */
+.tools {
+  display: grid;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.tools ul {
+  border-top: 1px solid var(--rule);
+}
+
+.tools li {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 20px;
+  align-items: baseline;
+  padding: 13px 8px;
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.2s;
+}
+
+.tools li:hover {
+  background: var(--bg-hover);
+}
+
+.tools__name {
+  font-size: 13.5px;
+  color: var(--text);
+}
+
+.tools__note {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+@media (max-width: 900px) {
+  .steps {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .step:nth-child(3) {
+    border-left: 0;
+  }
+
+  .step:nth-child(n + 3) {
+    border-top: 1px solid var(--rule);
+  }
+}
+
+@media (max-width: 560px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .step {
+    border-left: 0;
+  }
+
+  .step:nth-child(n + 2) {
+    border-top: 1px solid var(--rule);
+  }
+
+  .tools li {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding-inline: 2px;
+  }
+}

@@ -1,0 +1,395 @@
+/* ---------- 精选项目：左文右规格表 ---------- */
+
+.feat {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 268px;
+  margin-bottom: clamp(44px, 6vw, 68px);
+  transition: border-color 0.25s;
+}
+
+.feat:hover {
+  border-color: var(--rule-strong);
+}
+
+.feat__main {
+  padding: clamp(22px, 3vw, 34px);
+  min-width: 0;
+}
+
+.feat__name {
+  margin-top: 14px;
+  font-size: clamp(21px, 2.6vw, 27px);
+  letter-spacing: -0.032em;
+}
+
+.feat__summary {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.feat__detail {
+  margin-top: 10px;
+  max-width: 52ch;
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+
+.feat__actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.feat__ext {
+  width: 14px;
+  height: 14px;
+  transform: rotate(45deg);
+}
+
+.feat__spec {
+  margin: 0;
+  padding: 22px 24px;
+  border-left: 1px solid var(--rule);
+  background: var(--bg-sunk);
+  display: grid;
+  align-content: start;
+  gap: 18px;
+}
+
+.feat__spec > div {
+  display: grid;
+  gap: 7px;
+}
+
+.feat__spec dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.feat__spec dd {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.feat__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ---------- 筛选：文字标签 + 下划线，不做药丸按钮 ---------- */
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.tab {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding-block: 6px;
+  font-size: 14px;
+  color: var(--text-dim);
+  transition: color 0.2s;
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tab.is-on {
+  color: var(--text);
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -13px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.3s var(--ease);
+}
+
+.tab.is-on::after {
+  transform: scaleX(1);
+}
+
+.tab__n {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ---------- 列表行 ---------- */
+
+.rows {
+  margin-top: 4px;
+}
+
+.rows__head,
+.row__btn {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 0.85fr) minmax(0, 1.5fr) 96px 44px 16px;
+  align-items: baseline;
+  gap: 18px;
+}
+
+.rows__head {
+  padding: 14px 10px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.row {
+  border-bottom: 1px solid var(--rule);
+}
+
+.row__btn {
+  width: 100%;
+  text-align: left;
+  padding: 17px 10px;
+  transition: background 0.2s;
+}
+
+.row__btn:hover {
+  background: var(--bg-hover);
+}
+
+.row__num {
+  font-size: 12px;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.row__btn:hover .row__num,
+.row.is-open .row__num {
+  color: var(--accent-hi);
+}
+
+.row__name {
+  font-size: 15.5px;
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  color: var(--text);
+}
+
+.row__plus {
+  position: relative;
+  justify-self: end;
+  align-self: center;
+  width: 13px;
+  height: 13px;
+}
+
+.row__plus::before,
+.row__plus::after {
+  content: '';
+  position: absolute;
+  background: var(--muted);
+  transition: background 0.2s, transform 0.3s var(--ease);
+}
+
+.row__plus::before {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  margin-top: -0.5px;
+}
+
+.row__plus::after {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  margin-left: -0.5px;
+}
+
+.row__btn:hover .row__plus::before,
+.row__btn:hover .row__plus::after,
+.row.is-open .row__plus::before,
+.row.is-open .row__plus::after {
+  background: var(--accent-hi);
+}
+
+.row.is-open .row__plus::after {
+  transform: rotate(90deg);
+}
+
+.row__summary {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.row__type,
+.row__year {
+  font-size: 11.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* 展开：0fr → 1fr */
+.row__more {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s var(--ease);
+}
+
+.row.is-open .row__more {
+  grid-template-rows: 1fr;
+}
+
+.row__more-inner {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 20px;
+  padding-inline: 48px;
+  opacity: 0;
+  transition: opacity 0.3s, padding-block 0.4s var(--ease);
+  padding-block: 0;
+}
+
+.row.is-open .row__more-inner {
+  padding-block: 6px 22px;
+  opacity: 1;
+}
+
+.row__more-inner p {
+  max-width: 62ch;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+
+.row__more-inner ul {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.row__links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.row__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-dim);
+  transition: color 0.2s;
+}
+
+.row__links a:hover {
+  color: var(--accent-hi);
+}
+
+.row__links svg {
+  width: 15px;
+  height: 15px;
+}
+
+.row__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.row__stars svg {
+  width: 13px;
+  height: 13px;
+}
+
+.rows__empty {
+  padding: 28px 10px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------- 响应式：表格塌成两行 ---------- */
+
+@media (max-width: 860px) {
+  .feat {
+    grid-template-columns: 1fr;
+  }
+
+  .feat__spec {
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 760px) {
+  .rows__head {
+    display: none;
+  }
+
+  .row__btn {
+    grid-template-columns: 26px minmax(0, 1fr) 46px 14px;
+    gap: 10px 12px;
+  }
+
+  .row__num {
+    grid-area: 1 / 1;
+  }
+
+  .row__name {
+    grid-area: 1 / 2;
+  }
+
+  .row__year {
+    grid-area: 1 / 3;
+  }
+
+  .row__plus {
+    grid-area: 1 / 4;
+  }
+
+  .row__summary {
+    grid-area: 2 / 2 / 3 / 5;
+  }
+
+  .row__type {
+    display: none;
+  }
+
+  .row__more-inner {
+    grid-template-columns: 1fr;
+    align-items: start;
+    padding-inline: 40px;
+    gap: 14px;
+  }
+
+  .feat__spec {
+    grid-template-columns: 1fr 1fr;
+  }
+}
