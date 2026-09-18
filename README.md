@@ -46,7 +46,7 @@ npm run preview  # 本地预览构建结果
 
 `--accent-hi` 的语义是"用于文字和描边的强调色"：深色主题下比 `--accent` 更亮，浅色主题下更暗，两边都为了保证对比度。
 
-## 部署到自己的服务器（当前采用）
+## 部署到自己的服务器（备用入口）
 
 线上地址：**http://47.254.207.200/me/** ，站点文件在服务器 `/var/www/me/`。
 
@@ -72,44 +72,33 @@ ssh kl 'curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:8899/新路径
 
 配置片段和注意事项见 [`deploy/portfolio.nginx.conf`](deploy/portfolio.nginx.conf)。改动流程：拉下 `/etc/nginx/sites-available/anime-chat` → 本地改 → `nginx -t` 通过才 `systemctl reload nginx`（失败就回滚，服务器上有 `.bak` 备份）。
 
-## 部署到 GitHub Pages（备选）
+## GitHub Pages（已上线）
 
-1. 仓库 Settings → Pages → Build and deployment 选 **GitHub Actions**
-2. 新建 `.github/workflows/deploy.yml`：
+线上地址：**https://youdaow.github.io/** —— 仓库名正好是 `youdaow.github.io`，所以没有多余路径，HTTPS 自带。
 
-```yaml
-name: 部署个人网站
-on:
-  push:
-    branches: [main]
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - uses: actions/configure-pages@v5
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+结构：`main` 分支放源码，`gh-pages` 分支放构建产物，Pages 从 `gh-pages` 的根目录伺服。
+
+### 以后更新
+
+```bash
+npm run build
+rm -rf ../_gp && mkdir -p ../_gp && cp -r dist/* ../_gp/
+cd ../_gp && git init -q -b gh-pages && git add -A && git commit -q -m "更新产物" && git push -f https://github.com/youdaow/youdaow.github.io.git gh-pages:gh-pages && cd -
 ```
 
-`vite.config.js` 里已经是 `base: './'`，项目页和独立域名都能直接部署。
+推完线上内容没变的话，手动触发一次构建：
+
+```bash
+gh api -X POST repos/youdaow/youdaow.github.io/pages/builds
+```
+
+### 为什么没用 GitHub Actions
+
+`gh` 的 OAuth token 没有 `workflow` 作用域，推 `.github/workflows/*` 会被 GitHub 直接拒绝；而设备授权需要访问 `github.com` 网页端点，本机网络不通（`api.github.com` 是通的）。所以走分支部署。
+
+Actions 的工作流文件留在 [`deploy/pages-workflow.yml`](deploy/pages-workflow.yml)。哪天补上权限（`gh auth refresh --hostname github.com -s workflow`），把它移回 `.github/workflows/deploy.yml` 就能切成"push 即自动部署"，届时 `gh-pages` 分支可以删掉。
+
+> `vite.config.js` 的 `base: './'` 是这套部署能成立的前提——产物用相对路径引用资源，放根目录或子目录都能跑。
 
 ## 目录结构
 
